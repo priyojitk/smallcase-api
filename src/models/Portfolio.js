@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-var uniqueValidator = require("mongoose-unique-validator");
 
 const ListSchema = new Schema({
   ticker_symbol_id: {
@@ -13,6 +12,5 @@ const PortfolioSchema = new Schema({
   portfolio: { type: String, required: true },
   security_list: [ListSchema],
 });
-PortfolioSchema.plugin(uniqueValidator);
 
 export default model("Portfolio", PortfolioSchema);
