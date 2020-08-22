@@ -230,7 +230,12 @@ export const getPortfolioDetails = async (req, res) => {
   try {
     const portfolio_id = req.params.portfolio_id;
     console.log(portfolio_id);
-    const result = await Portfolio.find({ _id: portfolio_id });
+    const result = await Portfolio.find({ _id: portfolio_id })
+      .populate({
+        path: "security_list",
+        populate: { path: "ticker_symbol_id" },
+      })
+      .exec();
     res.json(result);
   } catch (error) {
     res.status(500).send({ error: error });
